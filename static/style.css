@@ -1,65 +1,65 @@
 /* Default Padding for the Entire Page */
 body {
-    margin: 0; /* Remove default margin */
-    padding: 0; /* Remove default padding */
-    display: flex; /* Use flexbox to center content vertically */
-    flex-direction: column; /* Stack elements vertically */
-    min-height: 100vh; /* Ensure the body spans the full viewport height */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 /* Inner Body Styling */
 .inner-body {
-    background-color: #ffffff; /* White background for the inner body */
-    padding: 20px; /* Adds padding inside the inner body */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
-    flex-grow: 1; /* Allow the inner body to grow and take up remaining space */
-    display: flex; /* Use flexbox for layout */
-    flex-direction: column; /* Stack children vertically */
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Ensure Full Width for Inner Body */
 .container-fluid {
-    max-width: 100%; /* Ensures the container takes up the full width */
-    padding: 0; /* Removes default padding from Bootstrap */
-    flex-grow: 1; /* Allow the container to grow and take up remaining space */
-    display: flex; /* Use flexbox for layout */
-    flex-direction: column; /* Stack children vertically */
+    max-width: 100%;
+    padding: 0;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Adjust Card Padding */
 .card-body {
-    padding: 0; /* Remove all padding from .card-body */
+    padding: 0;
 }
 
 /* Add Custom Padding Inside Cards if Needed */
 .card-body > * {
-    padding-left: 0.5rem; /* Reduce left padding */
-    padding-right: 0.5rem; /* Reduce right padding */
-    padding-top: 0.25rem; /* Reduce top padding */
-    padding-bottom: 0.25rem; /* Reduce bottom padding */
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
 }
 
 /* Ensure Content Aligns Properly */
 .card-title,
 .card-subtitle,
 .card-text {
-    margin: 0; /* Remove default margins to align content tightly */
+    margin: 0;
 }
 
 /* Scrollable Log Box */
 .log-box {
-    background-color: #000000; /* Black background */
-    color: #ffffff; /* White text */
-    border: 1px solid #444; /* Subtle border for definition */
-    padding: 0.5rem; /* Padding inside the log box */
-    height: 355px; /* Fixed height for the log box */
-    overflow-y: auto; /* Adds a vertical scrollbar when content overflows */
-    border-radius: 8px; /* Rounded corners for a clean look */
-    font-family: "Courier New", Courier, monospace; /* Monospace font for logs */
-    font-size: 0.9rem; /* Slightly smaller font size for readability */
-    line-height: 1.4; /* Improved line spacing */
-    white-space: pre-wrap; /* Preserve whitespace and wrap text */
+    background-color: #000000;
+    color: #ffffff;
+    border: 1px solid #444;
+    padding: 0.5rem;
+    height: 355px;
+    overflow-y: auto;
+    border-radius: 8px;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    white-space: pre-wrap;
 }
 
 /* Circle Indicators */
@@ -69,7 +69,7 @@ body {
     border-radius: 50%;
     background-color: red;
     display: inline-block;
-    margin-right: 10px; /* Ensure spacing between circle and text */
+    margin-right: 10px;
 }
 
 .circle.connected {
