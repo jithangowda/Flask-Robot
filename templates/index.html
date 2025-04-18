@@ -31,13 +31,69 @@
                 </div>
               </div>
 
-              <!-- Gamepad Control Card -->
-              <div class="card gamepad-card">
-                <div class="card-body">
-                  <h5 class="card-title">Gamepad Control</h5>
-                  <h6 class="card-subtitle mb-2 text-body-secondary">
-                    WASD Space
-                  </h6>
+              <!-- Split Row for Gamepad and Controls -->
+              <div class="row">
+                <!-- Left Column for Gamepad -->
+                <div class="col-6">
+                  <div class="card gamepad-card">
+                    <div class="card-body">
+                      <h5 class="card-title">Gamepad Control</h5>
+                      <h6 class="card-subtitle mb-2 text-body-secondary">
+                        WASD & Space
+                      </h6>
+                      <div class="gamepad-controls">
+                        <div class="gamepad-button-row">
+                          <button class="gamepad-btn" id="w-btn">W</button>
+                        </div>
+                        <div class="gamepad-button-row">
+                          <button class="gamepad-btn" id="a-btn">A</button>
+                          <button class="gamepad-btn stop-btn" id="stop-btn">
+                            Stop
+                          </button>
+                          <button class="gamepad-btn" id="s-btn">S</button>
+                        </div>
+                        <div class="gamepad-button-row">
+                          <button class="gamepad-btn" id="d-btn">D</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Right Column for Sliders -->
+                <div class="col-6">
+                  <div class="card gamepad-controls-card">
+                    <div class="card-body">
+                      <h5 class="card-title">Camera Control</h5>
+
+                      <!-- Tilt Slider -->
+                      <label for="tilt-slider" class="form-label">Tilt</label>
+                      <input
+                        type="range"
+                        class="form-range"
+                        id="tilt-slider"
+                        min="0"
+                        max="180"
+                        step="1"
+                      />
+
+                      <!-- Pan Slider -->
+                      <label for="pan-slider" class="form-label">Pan</label>
+                      <input
+                        type="range"
+                        class="form-range"
+                        id="pan-slider"
+                        min="0"
+                        max="180"
+                        step="1"
+                      />
+
+                      <!-- Flash Button -->
+                      <button class="btn btn-primary mt-3" id="flash-button">
+                        Toggle Flash
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

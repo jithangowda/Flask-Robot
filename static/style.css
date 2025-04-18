@@ -90,5 +90,75 @@ body {
 }
 
 .gamepad-card {
-    flex: 2.5;
+    flex: 1;
+    margin-bottom: 1rem;
+}
+
+/* Slider Control Card */
+.gamepad-controls-card {
+    flex: 1;
+    margin-top: 1rem;
+}
+
+.card-body {
+    padding: 1rem;
+}
+
+/* Gamepad Control Styling */
+.gamepad-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.gamepad-button-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.gamepad-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.stop-btn {
+    background-color: #dc3545;
+}
+
+.gamepad-btn:hover {
+    background-color: #0056b3;
+}
+
+.stop-btn:hover {
+    background-color: #c82333;
+}
+
+input[type="range"], #flash-button {
+    width: 100%;
+}
+
+#flash-button {
+    margin-top: 1rem;
+}
+
+/* New: Adjust the Flexbox Layout for the Gamepad and Controls */
+.gamepad-controls {
+    display: flex;
+    justify-content: space-between; /* To align Gamepad and Controls side by side */
+    gap: 10px;
+}
+
+/* Adjust Height of the Gamepad and Slider Cards */
+.gamepad-card, .gamepad-controls-card {
+    flex: 1;  /* Ensure both cards take equal space */
 }
