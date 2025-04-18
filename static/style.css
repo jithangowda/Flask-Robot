@@ -75,3 +75,20 @@ body {
 .circle.connected {
     background-color: rgb(21, 192, 21);
 }
+
+/* New: Left Column Flex Layout */
+.left-column {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* New: Height ratios for the two cards */
+.video-card {
+    flex: 3;
+    margin-bottom: 1rem;
+}
+
+.gamepad-card {
+    flex: 2.5;
+}
