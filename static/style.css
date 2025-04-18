@@ -5,10 +5,10 @@ body {
     display: flex; /* Use flexbox to center content vertically */
     flex-direction: column; /* Stack elements vertically */
     min-height: 100vh; /* Ensure the body spans the full viewport height */
-  }
-  
-  /* Inner Body Styling */
-  .inner-body {
+}
+
+/* Inner Body Styling */
+.inner-body {
     background-color: #ffffff; /* White background for the inner body */
     padding: 20px; /* Adds padding inside the inner body */
     border-radius: 8px; /* Rounded corners */
@@ -16,57 +16,62 @@ body {
     flex-grow: 1; /* Allow the inner body to grow and take up remaining space */
     display: flex; /* Use flexbox for layout */
     flex-direction: column; /* Stack children vertically */
-  }
-  
-  /* Ensure Full Width for Inner Body */
-  .container-fluid {
+}
+
+/* Ensure Full Width for Inner Body */
+.container-fluid {
     max-width: 100%; /* Ensures the container takes up the full width */
     padding: 0; /* Removes default padding from Bootstrap */
     flex-grow: 1; /* Allow the container to grow and take up remaining space */
     display: flex; /* Use flexbox for layout */
     flex-direction: column; /* Stack children vertically */
-  }
-  
-  /* Adjust Card Padding */
-  .card-body {
+}
+
+/* Adjust Card Padding */
+.card-body {
     padding: 0; /* Remove all padding from .card-body */
-  }
-  
-  /* Add Custom Padding Inside Cards if Needed */
-  .card-body > * {
+}
+
+/* Add Custom Padding Inside Cards if Needed */
+.card-body > * {
     padding-left: 0.5rem; /* Reduce left padding */
     padding-right: 0.5rem; /* Reduce right padding */
     padding-top: 0.25rem; /* Reduce top padding */
     padding-bottom: 0.25rem; /* Reduce bottom padding */
-  }
-  
-  /* Ensure Content Aligns Properly */
-  .card-title,
-  .card-subtitle,
-  .card-text {
+}
+
+/* Ensure Content Aligns Properly */
+.card-title,
+.card-subtitle,
+.card-text {
     margin: 0; /* Remove default margins to align content tightly */
-  }
-  
-  /* Scrollable Log Box */
-  .log-box {
-    background-color: #dee2e6;
-    border: 1px solid #dee2e6;
-    padding: 0.5rem; /* Reduce padding inside the log box */
+}
+
+/* Scrollable Log Box */
+.log-box {
+    background-color: #000000; /* Black background */
+    color: #ffffff; /* White text */
+    border: 1px solid #444; /* Subtle border for definition */
+    padding: 0.5rem; /* Padding inside the log box */
     height: 355px; /* Fixed height for the log box */
     overflow-y: auto; /* Adds a vertical scrollbar when content overflows */
-    border-radius: 8px;
-  }
-  
-  /* Circle Indicators */
-  .circle {
+    border-radius: 8px; /* Rounded corners for a clean look */
+    font-family: "Courier New", Courier, monospace; /* Monospace font for logs */
+    font-size: 0.9rem; /* Slightly smaller font size for readability */
+    line-height: 1.4; /* Improved line spacing */
+    white-space: pre-wrap; /* Preserve whitespace and wrap text */
+}
+
+/* Circle Indicators */
+.circle {
     width: 15px;
     height: 15px;
     border-radius: 50%;
     background-color: red;
     display: inline-block;
     margin-right: 10px; /* Ensure spacing between circle and text */
-  }
-  
-  .circle.connected {
+}
+
+.circle.connected {
     background-color: rgb(21, 192, 21);
-  }
+}
