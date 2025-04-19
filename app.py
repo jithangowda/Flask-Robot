@@ -76,9 +76,36 @@ def status():
 def logs():
     return jsonify({"logs": log_messages})
 
+@app.route("/command/<cmd>")
+def send_command(cmd):
+    if not esp_connected:
+        return jsonify({"status": "ESP not connected"}), 400
+
+    # Map the command to the correct format
+    if cmd == "w":
+        cmd = "forward"
+    elif cmd == "s":
+        cmd = "backward"
+    elif cmd == "a":
+        cmd = "left"
+    elif cmd == "d":
+        cmd = "right"
+    elif cmd == " ":
+        cmd = "stop"
+
+    udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    udp.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)  # ✅ allow broadcast
+    udp.sendto(cmd.encode(), ("<broadcast>", 4212))
+    log(f"[UDP] Sent command: {cmd}")
+    return jsonify({"status": "sent", "command": cmd})
+
+
 if __name__ == "__main__":
     ip = get_ip()
     log(f"[Flask] Running on http://{ip}:5000")
     threading.Thread(target=udp_broadcast, args=(ip,), daemon=True).start()
     threading.Thread(target=listen_for_connections, daemon=True).start()
     app.run(host="0.0.0.0", port=5000)
+
+    
+

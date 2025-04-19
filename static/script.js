@@ -34,3 +34,28 @@ setInterval(() => {
 
 updateStatus();
 updateLogs();
+
+const commandMap = {
+  "w-btn": "w",
+  "a-btn": "a",
+  "s-btn": "s",
+  "d-btn": "d",
+  "stop-btn": "stop",
+};
+
+function sendCommand(cmd) {
+  fetch(`/command/${cmd}`);
+}
+
+Object.keys(commandMap).forEach((btnId) => {
+  document.getElementById(btnId).addEventListener("click", () => {
+    sendCommand(commandMap[btnId]);
+  });
+});
+
+document.addEventListener("keydown", (e) => {
+  if (["w", "a", "s", "d", " "].includes(e.key.toLowerCase())) {
+    const cmd = e.key.toLowerCase() === " " ? "stop" : e.key.toLowerCase();
+    sendCommand(cmd);
+  }
+});
