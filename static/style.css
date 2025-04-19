@@ -171,6 +171,12 @@ input[type="range"],
     gap: 10px;
 }
 
+.gamepad-btn.pressed,
+.stop-btn.pressed {
+  box-shadow: 0 0 10px 2px #34db4a;
+  background-color: #34db4a !important;
+}
+
 .short-slider {
     max-width: 200px;
     flex-grow: 1;

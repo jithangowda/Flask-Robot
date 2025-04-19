@@ -54,8 +54,17 @@ Object.keys(commandMap).forEach((btnId) => {
 });
 
 document.addEventListener("keydown", (e) => {
-  if (["w", "a", "s", "d", " "].includes(e.key.toLowerCase())) {
-    const cmd = e.key.toLowerCase() === " " ? "stop" : e.key.toLowerCase();
+  const key = e.key.toLowerCase();
+  if (["w", "a", "s", "d", " "].includes(key)) {
+    const cmd = key === " " ? "stop" : key;
     sendCommand(cmd);
+
+    // Highlight the button
+    const btnId = Object.keys(commandMap).find((id) => commandMap[id] === cmd);
+    const btn = document.getElementById(btnId);
+    if (btn) {
+      btn.classList.add("pressed");
+      setTimeout(() => btn.classList.remove("pressed"), 150);
+    }
   }
 });

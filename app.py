@@ -17,7 +17,7 @@ def log(msg):
     log_messages.append(entry)
     if len(log_messages) > 50:
         log_messages.pop(0)
-    print(entry)
+    print(entry, flush=True) 
 
 def get_ip():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
