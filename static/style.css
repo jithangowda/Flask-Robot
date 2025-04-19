@@ -111,13 +111,14 @@ body {
 
 /* Gamepad Button Styling */
 .gamepad-btn {
-    width: 70px;  /* Adjust button width */
+    width: 60px;  /* Adjust button width */
     height: 60px;  /* Adjust button height */
     font-size: 1rem;  /* Adjust font size */
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #0d6ffc;
+    background-color:#3498db;
+    ;
     color: white;
     border-radius: 10%;  /* Make the buttons round */
     border: none;
@@ -133,11 +134,11 @@ body {
 }
 
 .gamepad-btn:hover {
-    background-color:#5a98f0;
+    background-color:#34db4a;
 }
 
 .stop-btn:hover {
-    background-color: #e35b5b;
+    background-color: #34db4a;
 }
 
 /* Slider Control Styling */
@@ -199,7 +200,3 @@ input[type="range"],
   border: none; /* No border */
   }
   
-
-  #flash-button:hover {
-    background-color: #e35b5b; /* Lighter red on hover */
-  }
