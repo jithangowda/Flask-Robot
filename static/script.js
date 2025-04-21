@@ -73,3 +73,30 @@ document.addEventListener("keydown", (e) => {
     }
   }
 });
+
+// Function to send slider values to Flask server
+function sendSliderValues(pan) {
+  // Invert the pan value
+  const invertedPan = 200 - pan; // Invert the range (40–160 → 160–40)
+
+  fetch("/slider", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ pan: invertedPan }), // Send the inverted value
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Slider value sent:", data);
+    })
+    .catch((error) => {
+      console.error("Error sending slider value:", error);
+    });
+}
+
+// Listen for changes in the pan slider
+document.getElementById("pan-slider").addEventListener("input", (event) => {
+  const pan = event.target.value;
+  sendSliderValues(pan);
+});

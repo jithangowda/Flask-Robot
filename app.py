@@ -1,5 +1,5 @@
 # app.py
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
 import socket
 import threading
 import time
@@ -106,11 +106,33 @@ def send_command(cmd):
         cmd = "stop"
 
     udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    udp.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)  # ✅ allow broadcast
+    udp.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)  
     udp.sendto(cmd.encode(), ("<broadcast>", 4212)) # 4212 is port for commands
     log(f"[UDP] Sent command: {cmd}")
     return jsonify({"status": "sent", "command": cmd})
 
+
+@app.route("/slider", methods=["POST"])
+def handle_slider():
+    if not esp8266_connected:
+        return jsonify({"status": "ESP8266 not connected"}), 400
+
+    data = request.get_json()
+    pan = data.get("pan")  # Only extract the "pan" value
+
+    if pan is None:
+        return jsonify({"status": "Invalid data"}), 400
+
+    # Format the message as "PAN:<value>"
+    msg = f"PAN:{pan}"
+
+    # Send the message to the ESP8266 via UDP
+    udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    udp.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+    udp.sendto(msg.encode(), ("<broadcast>", 4212))  # 4212 is the control port
+    log(f"[UDP] Sent slider data: {msg}")
+
+    return jsonify({"status": "sent", "pan": pan})
 
 if __name__ == "__main__":
     ip = get_ip()
