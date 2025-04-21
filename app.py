@@ -104,7 +104,7 @@ def send_command(cmd):
         cmd = "stop"
 
     udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    udp.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)  # ✅ allow broadcast
+    udp.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)  # allow broadcast
     udp.sendto(cmd.encode(), ("<broadcast>", 4212))
     log(f"[UDP] Sent command: {cmd}")
     return jsonify({"status": "sent", "command": cmd})
