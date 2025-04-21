@@ -3,18 +3,13 @@ function updateStatus() {
     .then((res) => res.json())
     .then((data) => {
       const esp = document.getElementById("esp-circle");
-      const esp8266 = document.getElementById("esp8266-circle");
       const espcam = document.getElementById("espcam-circle");
 
       esp.classList.toggle("connected", data.esp);
-      esp8266.classList.toggle("connected", data.esp8266);
       espcam.classList.toggle("connected", data.espcam);
 
       document.getElementById("esp-label").innerText = `ESP32: ${
         data.esp ? "Connected" : "Not Connected"
-      }`;
-      document.getElementById("esp8266-label").innerText = `ESP32: ${
-        data.esp8266 ? "Connected" : "Not Connected"
       }`;
       document.getElementById("espcam-label").innerText = `ESP32-CAM: ${
         data.espcam ? "Connected" : "Not Connected"

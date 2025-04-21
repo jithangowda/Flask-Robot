@@ -7,7 +7,6 @@ import time
 app = Flask(__name__)
 
 esp_connected = False
-esp8266_connected = False
 espcam_connected = False
 stop_broadcast = False
 log_messages = []
@@ -53,17 +52,12 @@ def listen_for_connections():
         if message == "ESP Connected":
             esp_connected = True
             log("[Server] ESP32 connected.")
-
-        elif message == "ESP8266 Connected":
-            esp8266_connected = True
-            log("[Server] ESP8266 Connected.")
-
         elif message == "ESP-CAM Connected":
             espcam_connected = True
             log("[Server] ESP32-CAM connected.")
 
-        if esp_connected and espcam_connected and esp8266_connected:
-            log("[Server] ✅✅✅ All devices connected. Stopping UDP broadcast.")
+        if esp_connected and espcam_connected:
+            log("[Server] ✅✅ Both devices connected. Stopping UDP broadcast.")
             stop_broadcast = True
             break
 
@@ -75,7 +69,6 @@ def index():
 def status():
     return jsonify({
         "esp": esp_connected,
-        "esp8266": esp8266_connected,
         "espcam": espcam_connected
     })
 
@@ -86,9 +79,6 @@ def logs():
 @app.route("/command/<cmd>")
 def send_command(cmd):
     if not esp_connected:
-        return jsonify({"status": "ESP not connected"}), 400
-    
-    if not esp8266_connected:
         return jsonify({"status": "ESP not connected"}), 400
 
     # Map the command to the correct format
@@ -104,7 +94,7 @@ def send_command(cmd):
         cmd = "stop"
 
     udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    udp.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)  # allow broadcast
+    udp.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)  # ✅ allow broadcast
     udp.sendto(cmd.encode(), ("<broadcast>", 4212))
     log(f"[UDP] Sent command: {cmd}")
     return jsonify({"status": "sent", "command": cmd})
