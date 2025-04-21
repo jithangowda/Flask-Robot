@@ -77,7 +77,7 @@ document.addEventListener("keydown", (e) => {
 // Function to send slider values to Flask server
 function sendSliderValues(pan) {
   // Invert the pan value
-  const invertedPan = 200 - pan; // Invert the range (40–160 → 160–40)
+  const invertedPan = 180 - pan; // Reverse the range (0–180 → 180–0)
 
   fetch("/slider", {
     method: "POST",
