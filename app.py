@@ -31,7 +31,7 @@ def get_ip():
         s.close()
     return IP
 
-def udp_broadcast(ip, port=4210):
+def udp_broadcast(ip, port=4210): # 4210 is connection port
     global stop_broadcast
     udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
     udp.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
@@ -63,7 +63,12 @@ def listen_for_connections():
             log("[Server] ESP32-CAM connected.")
 
         if esp_connected and espcam_connected and esp8266_connected:
-            log("[Server] ✅✅✅ All devices connected. Stopping UDP broadcast.")
+            log("[Server] ✅✅✅ All devices connected. Sending notification...")
+            # Send UDP message to notify devices
+            udp_notify = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+            udp_notify.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+            udp_notify.sendto("ALL_CONNECTED".encode(), ("<broadcast>", 4213))  # 4213 is for notification to 8266
+            log("[Server] ALL_CONNECTED")
             stop_broadcast = True
             break
 
@@ -102,7 +107,7 @@ def send_command(cmd):
 
     udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     udp.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)  # ✅ allow broadcast
-    udp.sendto(cmd.encode(), ("<broadcast>", 4212))
+    udp.sendto(cmd.encode(), ("<broadcast>", 4212)) # 4212 is port for commands
     log(f"[UDP] Sent command: {cmd}")
     return jsonify({"status": "sent", "command": cmd})
 
