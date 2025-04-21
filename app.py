@@ -7,6 +7,7 @@ import time
 app = Flask(__name__)
 
 esp_connected = False
+esp8266_connected = False
 espcam_connected = False
 stop_broadcast = False
 log_messages = []
@@ -41,7 +42,7 @@ def udp_broadcast(ip, port=4210):
         time.sleep(3)
 
 def listen_for_connections():
-    global esp_connected, espcam_connected, stop_broadcast
+    global esp_connected,  esp8266_connected, espcam_connected, stop_broadcast
     udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
     udp.bind(('0.0.0.0', 4211))
     while True:
@@ -52,12 +53,17 @@ def listen_for_connections():
         if message == "ESP Connected":
             esp_connected = True
             log("[Server] ESP32 connected.")
+
+        if message == "ESP8266 Connected":
+            esp8266_connected = True
+            log("[Server] ESP8266 connected.")
+        
         elif message == "ESP-CAM Connected":
             espcam_connected = True
             log("[Server] ESP32-CAM connected.")
 
-        if esp_connected and espcam_connected:
-            log("[Server] ✅✅ Both devices connected. Stopping UDP broadcast.")
+        if esp_connected and espcam_connected and esp8266_connected:
+            log("[Server] ✅✅✅ All devices connected. Stopping UDP broadcast.")
             stop_broadcast = True
             break
 
@@ -69,6 +75,7 @@ def index():
 def status():
     return jsonify({
         "esp": esp_connected,
+        "esp8266": esp8266_connected,
         "espcam": espcam_connected
     })
 
