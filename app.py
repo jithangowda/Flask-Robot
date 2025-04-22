@@ -1,17 +1,22 @@
-# app.py
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, Response
 import socket
 import threading
 import time
+import cv2
+import numpy as np
 
 app = Flask(__name__)
 
+# Existing variables
 esp_connected = False
 esp8266_connected = False
 espcam_connected = False
 stop_broadcast = False
 log_messages = []
-espcam_ip = None 
+espcam_ip = None
+
+# New variable for storing the latest frame from the ESP32-CAM
+latest_frame = None
 
 def log(msg):
     timestamp = time.strftime("[%H:%M:%S]", time.localtime())
@@ -19,7 +24,7 @@ def log(msg):
     log_messages.append(entry)
     if len(log_messages) > 50:
         log_messages.pop(0)
-    print(entry, flush=True) 
+    print(entry, flush=True)
 
 def get_ip():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -32,7 +37,7 @@ def get_ip():
         s.close()
     return IP
 
-def udp_broadcast(ip, port=4210): # 4210 is connection port
+def udp_broadcast(ip, port=4210):  # 4210 is connection port
     global stop_broadcast
     udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
     udp.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
@@ -43,7 +48,7 @@ def udp_broadcast(ip, port=4210): # 4210 is connection port
         time.sleep(3)
 
 def listen_for_connections():
-    global esp_connected,  esp8266_connected, espcam_connected, stop_broadcast
+    global esp_connected, esp8266_connected, espcam_connected, stop_broadcast, espcam_ip
     udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
     udp.bind(('0.0.0.0', 4211))
     while True:
@@ -55,13 +60,13 @@ def listen_for_connections():
             esp_connected = True
             log("[Server] ESP32 connected.")
 
-        if message == "ESP8266 Connected":
+        elif message == "ESP8266 Connected":
             esp8266_connected = True
             log("[Server] ESP8266 connected.")
         
         elif message == "ESP-CAM Connected":
             espcam_connected = True
-            espcam_ip = addr[0] 
+            espcam_ip = addr[0]
             log(f"[Server] ESP32-CAM connected with IP: {espcam_ip}")
 
         if esp_connected and espcam_connected and esp8266_connected:
@@ -88,7 +93,7 @@ def status():
     })
 
 @app.route("/logs")
-def logs(): 
+def logs():
     return jsonify({"logs": log_messages})
 
 @app.route("/command/<cmd>")
@@ -109,11 +114,10 @@ def send_command(cmd):
         cmd = "stop"
 
     udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    udp.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)  
-    udp.sendto(cmd.encode(), ("<broadcast>", 4212)) # 4212 is port for commands
+    udp.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+    udp.sendto(cmd.encode(), ("<broadcast>", 4212))  # 4212 is port for commands
     log(f"[UDP] Sent command: {cmd}")
     return jsonify({"status": "sent", "command": cmd})
-
 
 @app.route("/slider", methods=["POST"])
 def handle_slider():
@@ -137,12 +141,10 @@ def handle_slider():
 
     return jsonify({"status": "sent", "pan": pan})
 
+
 if __name__ == "__main__":
     ip = get_ip()
     log(f"[Flask] Running on http://{ip}:5000")
     threading.Thread(target=udp_broadcast, args=(ip,), daemon=True).start()
     threading.Thread(target=listen_for_connections, daemon=True).start()
     app.run(host="0.0.0.0", port=5000)
-
-    
-
