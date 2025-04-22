@@ -11,6 +11,7 @@ esp8266_connected = False
 espcam_connected = False
 stop_broadcast = False
 log_messages = []
+espcam_ip = None 
 
 def log(msg):
     timestamp = time.strftime("[%H:%M:%S]", time.localtime())
@@ -60,7 +61,8 @@ def listen_for_connections():
         
         elif message == "ESP-CAM Connected":
             espcam_connected = True
-            log("[Server] ESP32-CAM connected.")
+            espcam_ip = addr[0] 
+            log(f"[Server] ESP32-CAM connected with IP: {espcam_ip}")
 
         if esp_connected and espcam_connected and esp8266_connected:
             log("[Server] ✅✅✅ All devices connected. Sending notification...")
@@ -81,11 +83,12 @@ def status():
     return jsonify({
         "esp": esp_connected,
         "esp8266": esp8266_connected,
-        "espcam": espcam_connected
+        "espcam": espcam_connected,
+        "espcam_ip": espcam_ip
     })
 
 @app.route("/logs")
-def logs():
+def logs(): 
     return jsonify({"logs": log_messages})
 
 @app.route("/command/<cmd>")
