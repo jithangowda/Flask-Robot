@@ -15,8 +15,7 @@ stop_broadcast = False
 log_messages = []
 espcam_ip = None
 
-# New variable for storing the latest frame from the ESP32-CAM
-latest_frame = None
+
 
 def log(msg):
     timestamp = time.strftime("[%H:%M:%S]", time.localtime())
@@ -140,6 +139,7 @@ def handle_slider():
     log(f"[UDP] Sent slider data: {msg}")
 
     return jsonify({"status": "sent", "pan": pan})
+
 
 
 if __name__ == "__main__":
