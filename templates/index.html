@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ESP Status Dashboard</title>
+    <title>Robot Dashboard</title>
 
     <!-- Bootstrap CSS -->
     <link
@@ -29,11 +29,16 @@
                 <div class="card-body">
                   <h5 class="card-title">ESP32-CAM Stream</h5>
                   <div class="video-wrapper">
+                    <!-- MJPEG Stream -->
                     <img
                       id="video-stream"
                       src="{{ url_for('video_feed') }}"
                       alt="ESP32-CAM Stream"
                     />
+                    <!-- Connecting Text -->
+                    <div id="connecting-text" class="connecting-text">
+                      Connecting to stream...
+                    </div>
                   </div>
                 </div>
               </div>

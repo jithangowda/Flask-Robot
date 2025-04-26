@@ -3,7 +3,12 @@ import socket
 import threading
 import time
 import cv2
+import torch
+from ultralytics import YOLO
 import numpy as np
+
+model = YOLO('best.pt')
+model.eval()
 
 app = Flask(__name__)
 
@@ -161,8 +166,18 @@ def generate_frames():
                     ret, frame = cap.read()
                     if not ret:
                         break
-                    ret, buffer = cv2.imencode('.jpg', frame)
+
+                    
+                    results = model(frame) 
+
+                   
+                    annotated_frame = results[0].plot()  
+
+                    
+                    ret, buffer = cv2.imencode('.jpg', annotated_frame)
                     frame_bytes = buffer.tobytes()
+
+                
                     yield (b'--frame\r\n'
                            b'Content-Type: image/jpeg\r\n\r\n' + frame_bytes + b'\r\n')
                 cap.release()

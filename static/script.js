@@ -19,6 +19,13 @@ function updateStatus() {
       document.getElementById("espcam-label").innerText = `ESP32-CAM: ${
         data.espcam ? "Connected" : "Not Connected"
       }`;
+
+      const connectingText = document.getElementById("connecting-text");
+      if (data.espcam) {
+        connectingText.style.display = "none";
+      } else {
+        connectingText.style.display = "block";
+      }
     });
 }
 
