@@ -3,11 +3,10 @@ import socket
 import threading
 import time
 import cv2
-import torch
 from ultralytics import YOLO
-import numpy as np
 
-model = YOLO('best.pt')
+
+model = YOLO('models/best-colab-25e.pt')
 model.eval()
 
 app = Flask(__name__)
