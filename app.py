@@ -7,7 +7,7 @@ import numpy as np
 
 app = Flask(__name__)
 
-# Existing variables
+
 esp_connected = False
 esp8266_connected = False
 espcam_connected = False
@@ -15,7 +15,6 @@ stop_broadcast = False
 log_messages = []
 espcam_ip = None
 
-# New variable for video streaming
 stream_active = False
 
 
@@ -72,7 +71,7 @@ def listen_for_connections():
             espcam_connected = True
             espcam_ip = addr[0]
             log(f"[Server] ESP32-CAM connected with IP: {espcam_ip}")
-            stream_active = True  # Start streaming when ESP-CAM is connected
+            stream_active = True  
 
         if esp_connected and espcam_connected and esp8266_connected:
             log("[Server] ✅✅✅ All devices connected. Sending notification...")

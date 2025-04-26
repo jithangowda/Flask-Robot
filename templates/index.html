@@ -28,10 +28,13 @@
               <div class="card video-card">
                 <div class="card-body">
                   <h5 class="card-title">ESP32-CAM Stream</h5>
-                  <img
-                    src="{{ url_for('video_feed') }}"
-                    alt="ESP32-CAM Stream"
-                  />
+                  <div class="video-wrapper">
+                    <img
+                      id="video-stream"
+                      src="{{ url_for('video_feed') }}"
+                      alt="ESP32-CAM Stream"
+                    />
+                  </div>
                 </div>
               </div>
 
