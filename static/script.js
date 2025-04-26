@@ -64,7 +64,6 @@ document.addEventListener("keydown", (e) => {
     const cmd = key === " " ? "stop" : key;
     sendCommand(cmd);
 
-    // Highlight the button
     const btnId = Object.keys(commandMap).find((id) => commandMap[id] === cmd);
     const btn = document.getElementById(btnId);
     if (btn) {
@@ -74,17 +73,15 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-// Function to send slider values to Flask server
 function sendSliderValues(pan) {
-  // Invert the pan value
-  const invertedPan = 180 - pan; // Reverse the range (0–180 → 180–0)
+  const invertedPan = 180 - pan;
 
   fetch("/slider", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ pan: invertedPan }), // Send the inverted value
+    body: JSON.stringify({ pan: invertedPan }),
   })
     .then((response) => response.json())
     .then((data) => {
@@ -95,7 +92,6 @@ function sendSliderValues(pan) {
     });
 }
 
-// Listen for changes in the pan slider
 document.getElementById("pan-slider").addEventListener("input", (event) => {
   const pan = event.target.value;
   sendSliderValues(pan);

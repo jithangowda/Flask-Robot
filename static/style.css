@@ -111,26 +111,26 @@ body {
 
 /* Gamepad Button Styling */
 .gamepad-btn {
-    width: 60px;  /* Adjust button width */
-    height: 60px;  /* Adjust button height */
-    font-size: 1rem;  /* Adjust font size */
+    width: 60px;  
+    height: 60px;  
+    font-size: 1rem; 
     display: flex;
     justify-content: center;
     align-items: center;
     background-color:#3498db;
     ;
     color: white;
-    border-radius: 10%;  /* Make the buttons round */
+    border-radius: 10%;  
     border: none;
     cursor: pointer;
 }
 
 .stop-btn {
-    background-color: #e92929; /* Red background */
+    background-color: #e92929;
     ;
-    border-radius: 50%;  /* Make the "Stop" button round */
-    width: 60px;  /* Adjust width for round shape */
-    height: 60px;  /* Adjust height for round shape */
+    border-radius: 50%;  
+    width: 60px;  
+    height: 60px; 
 }
 
 .gamepad-btn:hover {
@@ -148,22 +148,20 @@ input[type="range"],
 }
 
 
-
-/* New: Adjust the Flexbox Layout for the Gamepad and Controls */
 .gamepad-controls {
     display: flex;
-    justify-content: space-between; /* To align Gamepad and Controls side by side */
+    justify-content: space-between; 
     gap: 10px;
 }
 
-/* Adjust Height of the Gamepad and Slider Cards */
+
 .gamepad-card,
 .gamepad-controls-card {
-    flex: 1;  /* Ensure both cards take equal space */
+    flex: 1; 
     margin-bottom: 1rem;
 }
 
-/* Adjust Layout of the Gamepad and Slider Cards Together */
+
 .gamepad-controls-card {
     display: flex;
     flex-direction: column;
@@ -200,9 +198,9 @@ input[type="range"],
     padding: 4px 10px;
     width: 110px;
     display: block;
-    margin: 10px auto 0 auto; /* top auto bottom */
-    background-color: #e92929; /* Red background */
-  color: white; /* White text color */
-  border: none; /* No border */
+    margin: 10px auto 0 auto;
+    background-color: #e92929; 
+  color: white; 
+  border: none; 
   }
   
