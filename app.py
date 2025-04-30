@@ -138,21 +138,20 @@ def handle_slider():
         return jsonify({"status": "ESP8266 not connected"}), 400
 
     data = request.get_json()
-    pan = data.get("pan")  # Only extract the "pan" value
+    tilt = data.get("tilt")  
 
-    if pan is None:
+    if tilt is None:
         return jsonify({"status": "Invalid data"}), 400
 
-    # Format the message as "PAN:<value>"
-    msg = f"PAN:{pan}"
+    msg = f"TILT:{tilt}"  
 
-    # Send the message to the ESP8266 via UDP
     udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     udp.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
-    udp.sendto(msg.encode(), ("<broadcast>", 4212))  # 4212 is the control port
+    udp.sendto(msg.encode(), ("<broadcast>", 4212))
     log(f"[UDP] Sent slider data: {msg}")
 
-    return jsonify({"status": "sent", "pan": pan})
+    return jsonify({"status": "sent", "tilt": tilt})
+
 
 
 def generate_frames():

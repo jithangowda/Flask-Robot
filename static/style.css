@@ -175,33 +175,31 @@ input[type="range"],
   background-color: #34db4a !important;
 }
 
-.short-slider {
-    max-width: 200px;
-    flex-grow: 1;
-  }
-  
-  .slider-wrapper {
+
+.slider-wrapper {
+    height: 200px;
     display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: 10px;
   }
   
+ 
   .slider-wrapper span {
-    width: 90px;
     text-align: center;
     font-weight: 500;
   }
   
-
-  #flash-button {
-    font-size: 0.8rem;
-    padding: 4px 10px;
-    width: 110px;
-    display: block;
-    margin: 10px auto 0 auto;
-    background-color: #e92929; 
-  color: white; 
-  border: none; 
+  
+  #tilt-slider {
+    writing-mode: bt-lr;
+    appearance: slider-vertical;
+    -webkit-appearance: slider-vertical;
+    -moz-appearance: slider-vertical;
+    width: 30px;
+    height: 150px;
+    transform: rotate(180deg); 
   }
   
 

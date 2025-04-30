@@ -80,26 +80,24 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-function sendSliderValues(pan) {
-  const invertedPan = 180 - pan;
-
+function sendSliderValues(tilt) {
   fetch("/slider", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ pan: invertedPan }),
+    body: JSON.stringify({ tilt: tilt }),
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log("Slider value sent:", data);
+      console.log("Tilt value sent:", data);
     })
     .catch((error) => {
-      console.error("Error sending slider value:", error);
+      console.error("Error sending tilt value:", error);
     });
 }
 
-document.getElementById("pan-slider").addEventListener("input", (event) => {
-  const pan = event.target.value;
-  sendSliderValues(pan);
+document.getElementById("tilt-slider").addEventListener("input", (event) => {
+  const tilt = event.target.value;
+  sendSliderValues(tilt);
 });
