@@ -78,19 +78,38 @@
                     <div class="card-body">
                       <h5 class="card-title">Camera Control</h5>
 
-                      <!-- Tilt Slider -->
-                      <label for="tilt-slider" class="form-label">Tilt</label>
-                      <div class="slider-wrapper">
-                        <span>0°</span>
-                        <input
-                          type="range"
-                          id="tilt-slider"
-                          min="0"
-                          max="90"
-                          step="1"
-                          value="90"
-                        />
-                        <span>90°</span>
+                      <div class="slider-layout">
+                        <!-- Tilt Slider -->
+                        <div class="tilt-slider-wrapper">
+                          <label for="tilt-slider" class="form-label"
+                            >Tilt</label
+                          >
+                          <div class="slider-wrapper">
+                            <span>0°</span>
+                            <input
+                              type="range"
+                              id="tilt-slider"
+                              min="0"
+                              max="90"
+                              step="1"
+                              value="90"
+                            />
+                            <span>90°</span>
+                          </div>
+                        </div>
+
+                        <!-- Pan Control Buttons (2 Buttons: Left & Right) -->
+                        <div class="pan-controls-wrapper">
+                          <label class="form-label">Pan</label>
+                          <div class="pan-controls">
+                            <button id="pan-left-btn" class="pan-btn">
+                              Left
+                            </button>
+                            <button id="pan-right-btn" class="pan-btn">
+                              Right
+                            </button>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>

@@ -101,3 +101,36 @@ document.getElementById("tilt-slider").addEventListener("input", (event) => {
   const tilt = event.target.value;
   sendSliderValues(tilt);
 });
+
+function sendPanCommand(direction) {
+  fetch("/pan", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ direction: direction }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(`Pan direction sent: ${direction}`, data);
+    })
+    .catch((error) => {
+      console.error("Error sending pan direction:", error);
+    });
+}
+
+document.getElementById("pan-left-btn").addEventListener("mousedown", () => {
+  sendPanCommand("left");
+});
+
+document.getElementById("pan-left-btn").addEventListener("mouseup", () => {
+  sendPanCommand("stop");
+});
+
+document.getElementById("pan-right-btn").addEventListener("mousedown", () => {
+  sendPanCommand("right");
+});
+
+document.getElementById("pan-right-btn").addEventListener("mouseup", () => {
+  sendPanCommand("stop");
+});

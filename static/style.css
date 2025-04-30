@@ -176,7 +176,55 @@ input[type="range"],
 }
 
 
-.slider-wrapper {
+/* Container for both Tilt and Pan controls */
+.slider-layout {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;  /* Adjust gap as necessary */
+    align-items: center;
+  }
+  
+  /* Wrapper for the Tilt Slider */
+  .tilt-slider-wrapper {
+    flex: 1;  /* Take up available space */
+  }
+  
+  /* Wrapper for Pan Controls */
+  .pan-controls-wrapper {
+    text-align: center;
+    flex: 0 0 auto; /* Make sure it takes only as much space as needed */
+  }
+  
+  /* Wrapper for Pan Control Buttons */
+  .pan-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  /* Styling for individual Pan Buttons */
+  .pan-btn {
+    width: 80px;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .pan-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .pan-btn:active {
+    background-color: #003d75;
+  }
+  
+  /* Styling for the Tilt Slider */
+  .slider-wrapper {
     height: 200px;
     display: flex;
     flex-direction: column;
@@ -185,12 +233,10 @@ input[type="range"],
     gap: 10px;
   }
   
- 
   .slider-wrapper span {
     text-align: center;
     font-weight: 500;
   }
-  
   
   #tilt-slider {
     writing-mode: bt-lr;
@@ -199,8 +245,9 @@ input[type="range"],
     -moz-appearance: slider-vertical;
     width: 30px;
     height: 150px;
-    transform: rotate(180deg); 
+    transform: rotate(180deg);
   }
+  
   
 
 

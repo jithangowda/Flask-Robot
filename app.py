@@ -152,7 +152,25 @@ def handle_slider():
 
     return jsonify({"status": "sent", "tilt": tilt})
 
+@app.route("/pan", methods=["POST"])
+def handle_pan():
+    if not esp8266_connected:
+        return jsonify({"status": "ESP8266 not connected"}), 400
 
+    data = request.get_json()
+    direction = data.get("direction")  
+
+    if direction not in ["left", "right", "stop"]:
+        return jsonify({"status": "Invalid direction"}), 400
+
+    msg = f"PAN:{direction}"  
+
+    udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    udp.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+    udp.sendto(msg.encode(), ("<broadcast>", 4212))
+    print(f"[UDP] Sent pan data: {msg}")
+
+    return jsonify({"status": "sent", "direction": direction})
 
 def generate_frames():
     global espcam_ip, stream_active
